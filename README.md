@@ -1,2 +1,2 @@
-# project_aurelion
-This repository contains a challenge developed as part of the IBM and Guayerd Artificial Intelligence Fundamentals Course.
+# Project Aurelion
+This repository contains a challenge project developed as part of the IBM and Guayerd Artificial Intelligence Fundamentals Course.
