@@ -11,13 +11,13 @@ La tienda virtual _Aurelion_, líder en ventas de productos de limpieza y alimen
 ### Solución propuesta
 Implementar un sistema de promociones personalizadas enviadas por correo electrónico a cada cliente. Estas promociones se diseñarán a partir del análisis de datos de ventas, productos adquiridos y hábitos de compra de clientes.
 
-### Dataset de referencia
+## Dataset de referencia
 
 La data se obtendrá desde fuentes primarias. Específicamente, desde el registro de ventas y clientes que colecciona la misma app, así como también desde una lista de productos que manejan las tiendas. Todos los registros se encuentran en archivos .xlsx, por tanto, se tratarán datos estructurados.
 
 Dentro de la base de datos, se cuenta con las siguientes tablas: clientes, productos, ventas y detalle de ventas.
 
-#### Tabla `clientes`
+### Tabla `clientes`
 Es una tabla que almacena el registro de los clientes que compran en Aurelion, permitiendo identificar a cada cliente y sus diferentes atributos, como correo electrónico o ciudad.
 
 A nivel de estructura cuenta con 5 campos (id_cliente, nombre_cliente, email, ciudad, fecha_alta) y con 100 registros. Asimismo, su primary key es id_cliente. No cuenta con foreign key.
@@ -29,7 +29,7 @@ Detalle de tipo y escala de los campos:
 - ciudad: texto, nominal
 - fecha_alta: numérico, intervalo
 
-#### Tabla `productos`
+### Tabla `productos`
 Informa sobre el catálogo de productos que vende la tienda a través de su app, conteniendo información básica del producto y el precio unitario para cálculos de ventas y promociones.
 
 A nivel de estructura cuenta con 4 campos (id_producto, nombre_producto, categoria, precio_unitario) y con 100 registros. Su primary key es id_producto. No cuenta con foreign key.
@@ -40,7 +40,7 @@ Detalle de tipo y escala de los campos:
 - categoria: texto, nominal
 - precio_unitario: numérico tipo int, razón
 
-#### Tabla `ventas`
+### Tabla `ventas`
 Es el registro de cada transacción/venta realizada en la tienda virtual, almancenando eventos de compra (cuándo, quién compró y cómo pagó).
 
 A nivel de estructura cuenta con 6 campos (id_venta, fecha, id_cliente, nombre_cliente, email, medio_pago) y con 120 registros. Su primary key es id_venta, mientras que el foreign key es id_cliente.
@@ -54,7 +54,7 @@ Detalle de tipo y escala de los campos:
 - email: texto, nominal
 - medio_pago: texto, nominal
 
-#### Tabla `detalle_ventas`
+### Tabla `detalle_ventas`
 Es el desglose de cada venta, representando los productos vendidos de una transacción concreta.
 
 A nivel de estructura cuenta con 6 campos (id_venta, id_producto, nombre_producto, cantidad, precio_unitario, importe) y con 343 registros. No presenta primary key. Contiene dos foreign key id_venta y id_producto
