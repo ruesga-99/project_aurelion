@@ -132,6 +132,8 @@ Criterio de éxito: el usuario puede leer y navegar interactivamente la document
 
 ### Pseudocódigo
 ```
+**Pseudocódigo**
+
 INICIO
     REPETIR
         MOSTRAR menú principal
@@ -178,10 +180,7 @@ INICIO
                     CONTINUAR
 
             OPCION 6:
-                MOSTRAR código
-                MOSTRAR opción SALIR
-                SI usuario elige SALIR ENTONCES
-                    CONTINUAR
+                TERMINAR EJECUCIÓN
 
             OPCION INVÁLIDA:
                 SOLICITAR reentrada
@@ -189,9 +188,84 @@ INICIO
         FIN SEGÚN
     HASTA que usuario cierre manualmente el programa
 FIN
-``` 
 
-### Diagrama de flujo
+
+**Diagrama de Flujo**
+
+                     +---------+
+                     |  INICIO |
+                     +----v----+
+                          |
+                      +-------+
+                      | REPETIR |<----------------------+
+                      +---v---+                       |
+                          |                           |
+                  +-------v-------+                   |
+                  | MOSTRAR Menú  |                   |
+                  +-------+-------+                   |
+                          |                           |
+                  +-------v-------+                   |
+                  | SOLICITAR Opción|                 |
+                  +-------+-------+                   |
+                          |                           |
+                      /---|-----\                     |
+                     <  OPCIÓN  >---SÍ (Inválida)----> (Regresar)
+                      \---|-----/                     |
+                          | NO                        |
+                       /--v--\                        |
+                      < SEGÚN >                       |
+                       \--|--/                        |
+                          |                           |
+            +-------------+-------------+             |
+            |             |             |             |
+        +---v---+     +---v---+     +---v---+         |
+        | Opc. 1,3,4,5 | | OPCIÓN 2 | | Opc. 6 (Fin) |         |
+        +---v---+     +---v---+     +---v---+         |
+            |             |             |             |
+        +---v---+         |             +-------------+
+        | EXTRAER |         |
+        | Contenido |         |
+        +---v---+         |
+            |             |
+        +---v---+         |
+        | MOSTRAR |         |
+        | SALIR |         |
+        +---v---+         |
+            |             |
+        /---v---\         |
+       < ¿SALIR? >--SÍ--------------------------------+
+        \---v---/
+            | NO
+            v
+       (Volver a MOSTRAR SALIR)
+
+%% LÓGICA DE OPCIÓN 2 (SUBMENÚ)
+           +---v---+
+           | MOSTRAR |
+           | Submenú |
+           +---v---+
+               |
+           +---v---+
+           | SOLICITAR |
+           | Subopción |
+           +---v---+
+               |
+           /---v---\
+          < Subopción? >
+           \---v---/
+               |
+       +-------+-------+
+       | 'a'   |  'b'  |
+       +---v---+--v----+
+           |      |
+      +----v-----+--v----+
+      | EXTRAER | | EXTRAER |
+      | Pár. 4-5| | Dataset |
+      +----v-----+--v----+
+           |
+           (Conecta a MOSTRAR SALIR de Opc. 1,3,4,5 para regresar al bucle)
+
+``` 
 
 ### Sugerencias Copilot
 #### Aceptadas
