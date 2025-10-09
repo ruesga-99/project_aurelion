@@ -1,6 +1,7 @@
 import os
 import re
 from pathlib import Path
+import unicodedata
 
 class Menu():
     def __init__(self):
@@ -83,21 +84,22 @@ class Menu():
     def show_text(self, text):
         self.limpiar_terminal()
         print("\n" + text + "\n")
-        input("Presione Enter para volver al menú...")
+        input("Presione Enter para regresar al menú...")
 
     ''' MENU MODULES
     '''
 
     def mostrar(self):
         self.limpiar_terminal()
-        print("\n--- Bienvenido a la documentación del proyecto 01: Tienda Aurelion ---")
-        print("Seleccione una opción:")
+        print("¡Bienvenido a la documentación del proyecto 01: Tienda Aurelion!")
+        print("\nSeleccione la opción deseada:")
         print("1. Información general")
-        print("2. Dataset")
-        print("3. Información y pasos del programa interactivo")    
+        print("2. Dataset de referencia")
+        print("\nPuedes consultar también sobre el trabajo detrás de este programa interactivo:")
+        print("3. Información y pasos del programa")    
         print("4. Pseudocódigo y diagrama")
         print("5. Sugerencias de Copilot")
-        print("6. Salir")
+        print("\n6. Salir")
 
     def general(self):
         """
@@ -113,10 +115,10 @@ class Menu():
     def dataset(self):
         while True:
             self.limpiar_terminal()
-            print("\nSubmenú Opción 2")
-            print("a) Resumen.")
-            print("b) Detalle.")
-            print("Presione Enter para volver al menú principal.")
+            print("\nSubmenú de Dataset:")
+            print("a) Resumen")
+            print("b) Detalle")
+            print("Presione Enter para regresar al menú principal.")
             choice = input("Elija a/b\n").strip().lower()
 
             if choice == "a":
@@ -181,24 +183,101 @@ class Menu():
             self.show_text(text)
 
     def pseudocodigo_diagrama(self):
-        sec_lines = self.get_section(self.lines, "Pseudocódigo")
-        if not sec_lines:
-            sec_lines = self.get_section(self.lines, "Pseudocodigo")
-        if not sec_lines:
+        """
+        Extrae e imprime las subsecciones de nivel 3 relacionadas con
+        'Pseudocódigo' y 'Diagrama' (incluyendo sus propias líneas de
+        encabezado) desde el documento.
+        """
+        headings = self.parse_headings(self.lines)
+        if not headings:
+            self.show_text("No se encontraron encabezados en el documento.")
             return
-        code_block = self.extract_code_block(sec_lines)
-        if code_block:
-            self.show_text(code_block)
+
+        # Normalizar para comparar sin tildes
+        def _norm(s):
+            s2 = unicodedata.normalize('NFD', s)
+            s2 = ''.join(c for c in s2 if unicodedata.category(c) != 'Mn')
+            return s2.lower()
+
+        terms = ["pseudocodigo", "diagrama"]
+        sections = []
+
+        for idx, level, title in headings:
+            # Buscamos subtítulos de nivel 3 que contengan los términos
+            if level != 3:
+                continue
+            low_title = _norm(title)
+            if any(t in low_title for t in terms):
+                # Incluir la línea de encabezado (start = idx)
+                start = idx
+                end = len(self.lines)
+                for idx2, level2, _ in headings:
+                    if idx2 > idx and level2 <= level:
+                        end = idx2
+                        break
+                section_lines = self.lines[start:end]
+                sections.append("\n".join(section_lines).strip())
+
+        if sections:
+            # Mostrar las secciones encontradas, manteniendo títulos y formato
+            out = "\n\n".join(sections)
+            self.show_text(out)
         else:
-            self.show_text("No se encontró bloque de pseudocódigo en el documento.")
+            self.show_text("No se encontraron secciones de 'Pseudocódigo' o 'Diagrama' en el documento.")
 
     def sugerencias_copilot(self):
-        sec_lines = self.get_section(self.lines, "Sugerencias Copilot")
-        if not sec_lines:
+        # Buscamos la sección completa incluyendo su encabezado
+        headings = self.parse_headings(self.lines)
+        target_idx = None
+        for idx, level, title in headings:
+            if "sugerencias copilot" in title.lower():
+                target_idx = idx
+                target_level = level
+                break
+
+        if target_idx is None:
+            self.show_text("No se encontró la sección 'Sugerencias Copilot'.")
             return
-        text = "\n".join(sec_lines).strip()
-        if text:
-            self.show_text(text)
+
+        start = target_idx
+        end = len(self.lines)
+        for idx2, level2, _ in headings:
+            if idx2 > start and level2 <= target_level:
+                end = idx2
+                break
+
+        # Normalizar función interna para comparaciones sin tildes
+        def _norm(s):
+            s2 = unicodedata.normalize('NFD', s)
+            s2 = ''.join(c for c in s2 if unicodedata.category(c) != 'Mn')
+            return s2.lower()
+
+        # Recolectar subsecciones nivel 2 y 3 dentro del rango [start, end)
+        sections = []
+        # Build a list of headings within the doc for quick lookup
+        for idx, level, title in headings:
+            if idx < start or idx >= end:
+                continue
+            if level in (2, 3):
+                # compute subsection end
+                sub_start = idx
+                sub_end = end
+                for idx2, level2, _ in headings:
+                    if idx2 > idx and idx2 < end and level2 <= level:
+                        sub_end = idx2
+                        break
+                section_lines = self.lines[sub_start:sub_end]
+                sections.append("\n".join(section_lines).strip())
+
+        # If no level 2/3 headings found, fallback to show whole section (including header)
+        if not sections:
+            sec = self.lines[start:end]
+            out = "\n".join(sec).strip()
+            self.show_text(out if out else "No hay contenido en 'Sugerencias Copilot'.")
+            return
+
+        out = "\n\n".join(sections)
+        self.show_text(out)
 
     def seleccionar(self):
         while not self.salir:
