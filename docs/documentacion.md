@@ -72,7 +72,7 @@ Detalle de tipo y escala de los campos:
 
 ### Pasos
 **1. Definición de objetivos**
-Crear un menú ordenado e interactivo con el cual las partes interesadas del proyecto puedan consultar de manera interactiva información sobre el mismo.
+Crear un menú ordenado e interactivo con el cual las partes interesadas del proyecto puedan consultar de manera dinámica la información sobre el mismo.
 
 **2. Listado de subtareas y dependencias**
 
