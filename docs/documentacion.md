@@ -13,7 +13,7 @@ Implementar un sistema de promociones personalizadas enviadas por correo electr�
 
 ## Dataset de referencia
 
-La data se obtendrá desde fuentes primarias. Específicamente, desde el registro de ventas y clientes que colecciona la misma app, así como también desde una lista de productos que manejan las tiendas. Todos los registros se encuentran en archivos .xlsx, por tanto, se tratarán datos estructurados.
+La data se obtendrá desde fuentes primarias. Específicamente, desde el registro de ventas y clientes que colecciona la misma app/web, así como también desde una lista de productos que manejan las tiendas. Todos los registros se encuentran en archivos .xlsx, por tanto, se tratan datos estructurados. 
 
 Dentro de la base de datos, se cuenta con las siguientes tablas: clientes, productos, ventas y detalle de ventas.
 
@@ -41,7 +41,7 @@ Detalle de tipo y escala de los campos:
 - precio_unitario: numérico tipo int, razón
 
 ### Tabla `ventas`
-Es el registro de cada transacción/venta realizada en la tienda virtual, almancenando eventos de compra (cuándo, quién compró y cómo pagó).
+Es el registro de cada transacción/venta realizada en la tienda virtual, almacenando eventos de compra (cuándo, quién compró y cómo pagó).
 
 A nivel de estructura cuenta con 6 campos (id_venta, fecha, id_cliente, nombre_cliente, email, medio_pago) y con 120 registros. Su primary key es id_venta, mientras que el foreign key es id_cliente.
 
@@ -71,24 +71,32 @@ Detalle de tipo y escala de los campos:
 ## Programa Interactivo
 
 ### Pasos
-1. **Definición de objectivos**
+**1. Definición de objetivos**
 Crear un menú ordenado e interactivo con el cual las partes interesadas del proyecto puedan consultar de manera interactiva información sobre el mismo.
 
-2. **Listado de subtareas y dependencias**
+**2. Listado de subtareas y dependencias**
+
 ```
 Mostrar menú principal
 Solicitar ingreso de opción
-    Opción 1:
-    Opción 2: 
-        Opción 2a: 
-        Opción 2b: 
-    Opción 3: 
-    Opción 4: 
-    Opción 5: 
-    Opción 6:
+    Opción 1: Extraer parrafos 1 a 3
+        Mostrar opción regresar
+    Opción 2: Mostrar submenú (a/b)
+        Opción 2a: Extraer párrafos 4 y 5
+            Mostrar opción regresar
+        Opción 2b: Extraer "Dataset" excluyendo párrafos 4 y 5
+            Mostrar opción regresar
+        Mostrar opción regresar
+    Opción 3: Extraer sección "Pasos: descomposición de problemas"
+        Mostrar opción regresar
+    Opción 4: Extraer sección "Pseudocódigo y diagrama de flujo
+        Mostrar opción regresar
+    Opción 5: Extraer sección "Sugerencias Copilot"
+        Mostrar opción regresar
+    Opción 6: Mostrar opción Salir
 ```
 
-3. **Definición entradas y salidas de cada subtarea**
+**3. Definición entradas y salidas de cada subtarea**
 ```
 Mostrar menú principal
     Solicitar ingreso de opción
@@ -98,6 +106,9 @@ Mostrar menú principal
         Opción 1: Extraer parrafos 1 a 3
             Entrada: entrada de usuario (1), archivo markdown
             Salida: texto de los párrafos 1 a 3.
+        Mostrar opción REGRESAR
+            Entrada: entrada de usuario (Enter)
+            Salida: Menu principal
 
         Opción 2: Mostrar submenú (a/b)
             Entrada: entrada de usuario (2)
@@ -105,35 +116,54 @@ Mostrar menú principal
             Opción 2a: Extraer párrafos 4 y 5
                 Entrada: entrada de usuario (a), archivo markdown
                 Salida: texto de los parrafos 4 y 5
+            Mostrar opción REGRESAR
+                Entrada: entrada de usuario (Enter)
+                Salida: Submenú
+
             Opción 2b: Extraer "Dataset" excluyendo párrafos 4 y 5
                 Entrada: entrada de usuario (b), archivo markdown
-                Salida: texto de la sección "### Dataset de referencia" sin parrafos 4 y 5
+                Salida: texto de la sección "Dataset de referencia" sin parrafos 4 y 5
+            Mostrar opción REGRESAR
+                Entrada: entrada de usuario (Enter)
+                Salida: Submenú 
+        
+        Mostrar opción REGRESAR
+            Entrada: entrada de usuario (Enter)
+            Salida: Menu principal
 
         Opción 3: Extraer sección "Pasos: descomposición de problemas"
             Entrada: entrada de usuario (3), archivo markdown
-            Salida: texto de los párrafos 1 a 3.
+            Salida: texto de la sección correspondiente
+        Mostrar opción REGRESAR
+            Entrada: entrada de usuario (Enter)
+            Salida: Menu principal
 
         Opción 4: Extraer sección "Pseudocódigo y diagrama de flujo
             Entrada: entrada de usuario (4), archivo markdown
-            Salida: texto de los párrafos 1 a 3.
+            Salida: texto de la sección correspondiente
+        Mostrar opción REGRESAR
+            Entrada: entrada de usuario (Enter)
+            Salida: Menu principal
 
         Opción 5: Extraer sección "Sugerencias Copilot"
             Entrada: entrada de usuario (5), archivo markdown
-            Salida: texto de los párrafos 1 a 3.
+            Salida: texto de la sección correspondiente
+        Mostrar opción REGRESAR
+            Entrada: entrada de usuario (Enter)
+            Salida: Menu principal
 
-        Opción 6: Extraer sección "Código"
-            Entrada: entrada de usuario (6), archivo markdown
-            Salida: texto de los párrafos 1 a 3.
+        Opción 6: Mostrar opción Salir
+            Entrada: entrada de usuario (6)
+            Salida: Terminación del programa
 ```
 
-4. **Estimación de reglas y excepciones**
-Entrada inválida en menús -> pedir reentrada.
-Criterio de éxito: el usuario puede leer y navegar interactivamente la documentación del proyecto.
+**4. Estimación de reglas y excepciones**
+- Entrada inválida en menús -> pedir reentrada.
+- Criterio de éxito: el usuario puede leer y navegar interactivamente la documentación del proyecto.
 
 ### Pseudocódigo
-```
-**Pseudocódigo**
 
+```
 INICIO
     REPETIR
         MOSTRAR menú principal
@@ -142,8 +172,8 @@ INICIO
         SEGÚN opción SELECCIONADA HACER
             OPCION 1:
                 EXTRAER párrafos 1 a 3 del archivo markdown
-                MOSTRAR opción SALIR
-                SI usuario elige SALIR ENTONCES
+                MOSTRAR opción REGRESAR
+                SI usuario elige REGRESAR ENTONCES
                     CONTINUAR (volver al menú)
 
             OPCION 2:
@@ -154,29 +184,38 @@ INICIO
 
                 SI subopción = a ENTONCES
                     EXTRAER párrafos 4 y 5 del archivo markdown
+                    
+                    MOSTRAR opción REGRESAR
+                    SI usuario elige REGRESAR ENTONCES
+                        CONTINUAR (volver al submenú)
+
                 SI subopción = b ENTONCES
                     EXTRAER sección " ### Dataset de referencia" EXCLUYENDO párrafos 4 y 5
 
-                MOSTRAR opción SALIR
-                SI usuario elige SALIR ENTONCES
-                    CONTINUAR
+                    MOSTRAR opción REGRESAR
+                    SI usuario elige REGRESAR ENTONCES
+                        CONTINUAR (volver al submenú)
+            
+                MOSTRAR opción REGRESAR
+                SI usuario elige REGRESAR ENTONCES
+                    CONTINUAR (volver al menú)
 
             OPCION 3:
                 EXTRAER sección "### Pasos: descomposición de problemas"
-                MOSTRAR opción SALIR
-                SI usuario elige SALIR ENTONCES
+                MOSTRAR opción REGRESAR
+                SI usuario elige REGRESAR ENTONCES
                     CONTINUAR
 
             OPCION 4:
                 EXTRAER sección "### Pseudocódigo y diagrama de flujo"
-                MOSTRAR opción SALIR
-                SI usuario elige SALIR ENTONCES
+                MOSTRAR opción REGRESAR
+                SI usuario elige REGRESAR ENTONCES
                     CONTINUAR
 
             OPCION 5:
                 EXTRAER sección "### Sugerencias Copilot"
-                MOSTRAR opción SALIR
-                SI usuario elige SALIR ENTONCES
+                MOSTRAR opción REGRESAR
+                SI usuario elige REGRESAR ENTONCES
                     CONTINUAR
 
             OPCION 6:
@@ -188,87 +227,81 @@ INICIO
         FIN SEGÚN
     HASTA que usuario cierre manualmente el programa
 FIN
+```
 
-
-**Diagrama de Flujo**
-
-                     +---------+
-                     |  INICIO |
-                     +----v----+
-                          |
-                      +-------+
-                      | REPETIR |<----------------------+
-                      +---v---+                       |
-                          |                           |
-                  +-------v-------+                   |
-                  | MOSTRAR Menú  |                   |
-                  +-------+-------+                   |
-                          |                           |
-                  +-------v-------+                   |
-                  | SOLICITAR Opción|                 |
-                  +-------+-------+                   |
-                          |                           |
-                      /---|-----\                     |
-                     <  OPCIÓN  >---SÍ (Inválida)----> (Regresar)
-                      \---|-----/                     |
-                          | NO                        |
-                       /--v--\                        |
-                      < SEGÚN >                       |
-                       \--|--/                        |
-                          |                           |
-            +-------------+-------------+             |
-            |             |             |             |
-        +---v---+     +---v---+     +---v---+         |
-        | Opc. 1,3,4,5 | | OPCIÓN 2 | | Opc. 6 (Fin) |         |
-        +---v---+     +---v---+     +---v---+         |
-            |             |             |             |
-        +---v---+         |             +-------------+
-        | EXTRAER |         |
-        | Contenido |         |
-        +---v---+         |
-            |             |
-        +---v---+         |
-        | MOSTRAR |         |
-        | SALIR |         |
-        +---v---+         |
-            |             |
-        /---v---\         |
-       < ¿SALIR? >--SÍ--------------------------------+
-        \---v---/
-            | NO
-            v
-       (Volver a MOSTRAR SALIR)
-
-%% LÓGICA DE OPCIÓN 2 (SUBMENÚ)
-           +---v---+
-           | MOSTRAR |
-           | Submenú |
-           +---v---+
-               |
-           +---v---+
-           | SOLICITAR |
-           | Subopción |
-           +---v---+
-               |
-           /---v---\
-          < Subopción? >
-           \---v---/
-               |
-       +-------+-------+
-       | 'a'   |  'b'  |
-       +---v---+--v----+
-           |      |
-      +----v-----+--v----+
-      | EXTRAER | | EXTRAER |
-      | Pár. 4-5| | Dataset |
-      +----v-----+--v----+
-           |
-           (Conecta a MOSTRAR SALIR de Opc. 1,3,4,5 para regresar al bucle)
-
-``` 
-
+### Diagrama de Flujo
+```
+                                    ─────────
+                                 (   INICIO   )
+                                   ────┬─────
+                                       ▼
+                                  ╭────────────╮
+    ┌────────────────────────────►|  REPETIR   │───────────────────┐
+    |                             ╰─────┬──────╯                   |
+    |                                   ▼                          |
+    |                          ╭──────────────────╮                |
+    |                          │   MOSTRAR menú   │            Hasta que
+    |                          │     principal    │          usuario cierre
+    |                          ╰────────┬─────────╯           manualmente
+    |                                   ▼                          |
+    |                        ╭────────────────────╮                |
+    |                        │ SOLICITAR ingreso  |◄──┐            |
+    |                        |  de opción (1 a 6) │   |            |
+    |                        ╰──────────┬─────────╯   |            |
+    |                                   ▼             |            |
+    |                                   /\          Opción         |
+    |                                  /  \        inválida        |
+    |                                 /    \          |            |
+    |        ┌── Opción 1,3,4,5 ── SEGÚN opción ──────┘            |
+    |        |                     seleccionada╲                   |
+    |        |                        \    /    ╲                  |
+    |        |                         \  /      ╲                 |
+    |        ▼                          \/     Opción 6            |
+    |    ╭────────────╮        Opción 2 |          ╲               |
+    |    |  PROCESAR  |                 |           ╲              |
+    |    |  contenido |                 ▼            ╲  ───────    |
+    |    ╰─────┬──────╯           ╭───────────╮       (   FIN   )◄─┘
+    |          ▼                  |  MOSTRAR  |         ─────── 
+    |   ╭───────────────╮         |  submenú  |
+    |   |    EXTRAER    |         ╰─────┬─────╯
+    |   |    sección    |               ▼ 
+    |   |correspondiente|         ╭───────────╮
+    |   ╰──────┬────────╯         | SOLICITAR |
+    |          ▼               ┌──| subopción |◄──────────────┐
+    |    ╭────────────╮        |  |    a/b    |               |
+    |    |   MOSTRAR  |◄──┬────┘  ╰─────┬─────╯               |
+    │    |   opción   |   |             |                     |
+    |    |  REGRESAR  |   |             ▼                     |
+    |    ╰─────┬──────╯   |             /\                    |
+    |          ▼          |            /  \                   |
+    |          /\         |           /    \                  |
+    |         /  \        |    ┌─a── Decisión ──b─┐           |
+    |        /    \       |    |      \    /      |           |
+    └──Sí── Decisión ─No──┘    |       \  /       |           |
+             \    /            |        \/        |           |
+              \  /             ▼                  ▼           |
+               \/       ╭────────────╮      ╭────────────╮    |
+                        |   EXTRAER  |      |   EXTRAER  |    |
+                        |  párrafos  |      |   sección  |    |
+                        |   4 y 5    |      |  "Dataset" |    |
+                        ╰──────┬─────╯      ╰─────┬──────╯    |
+                               └─────────┬────────┘           |
+                                         ▼                    |
+                                   ╭────────────╮             |
+                              ┌──► |  MOSTRAR   |             |
+                              |    |   opción   |             |
+                              |    |  regresar  |             |
+                              |    ╰─────┬──────╯             |
+                              |          ▼                    |
+                              |         /\                    |
+                              |        /  \                   |
+                              |       /    \                  |
+                              └─No── Decisión ──Sí────────────┘
+                                      \    /
+                                       \  / 
+                                        \/ 
+```
 ### Sugerencias Copilot
 #### Aceptadas
-#### Descartadas
 
-### Programa Python
+#### Descartadas
